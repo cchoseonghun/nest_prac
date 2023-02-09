@@ -4,7 +4,7 @@ export class CreateArticleDto {
   @IsString()
   readonly title: string;
 
-  @IsNumber()
+  @IsString()
   readonly content: string;
 
   @IsNumber()
