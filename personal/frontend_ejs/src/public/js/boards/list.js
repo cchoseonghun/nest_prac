@@ -28,7 +28,7 @@ const getBoards = () => {
 
     })
     .catch((e) => {
-      console.log('에러');
+      console.log("axios 통신실패");
       console.log(e);
     });
 };
