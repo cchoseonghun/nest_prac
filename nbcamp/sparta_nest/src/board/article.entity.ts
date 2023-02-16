@@ -1,6 +1,13 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn, } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
-@Entity({ schema: 'board', name: 'articles' })
+@Entity({ schema: 'nest_prac', name: 'articles' })
 export class Article {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   id: number;
