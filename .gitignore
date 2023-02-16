@@ -37,3 +37,4 @@ lerna-debug.log*
 **node_modules/
 **coverage/
 **dist/
+# .env  // 기록을 위해 같이 업로드

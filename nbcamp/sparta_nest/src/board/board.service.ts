@@ -1,14 +1,16 @@
 import _ from 'lodash';
 import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Article } from './article.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class BoardService {
-  // 원래는 Repository를 참조하여 비지니스 로직을 실행하기 위해 데이터베이스와 통신을 함
-  // 하지만, 여기선 편의성을 위하여 인-메모리 변수로 해결
-
+  constructor(
+    @InjectRepository(Article) private articleRepository: Repository<Article>
+  ) {}
 
   private articles = [];
-
   private articlePasswords = new Map();
 
   getArticles() {
