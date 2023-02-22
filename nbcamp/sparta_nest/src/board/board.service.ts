@@ -4,14 +4,13 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Article } from './article.entity';
-import { Repository } from 'typeorm';
+import { ArticleRepository } from './board.repository';
 
 @Injectable()
 export class BoardService {
   constructor(
-    @InjectRepository(Article) private articleRepository: Repository<Article>,
+    // @InjectRepository(Article) private articleRepository: Repository<Article>,
+    private articleRepository: ArticleRepository
   ) {}
 
   async getArticles() {
@@ -26,6 +25,10 @@ export class BoardService {
       where: { id, deletedAt: null },
       select: ['title', 'content', 'author', 'createdAt', 'updatedAt'],
     });
+  }
+
+  async getHotArticles() {
+    return await this.articleRepository.getArticlesByViewCount();
   }
 
   createArticle(title: string, content: string, password: number) {
