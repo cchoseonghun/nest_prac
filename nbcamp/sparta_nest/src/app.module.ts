@@ -1,4 +1,5 @@
 import {
+  CacheModule,
   MiddlewareConsumer,
   Module,
   NestModule,
@@ -27,6 +28,11 @@ import { UserModule } from './user/user.module';
       imports: [ConfigModule],
       useClass: JwtConfigService,
       inject: [ConfigService],
+    }),
+    CacheModule.register({
+      ttl: 60000,  // 데이터 캐싱 시간(밀리 초 단위)
+      max: 100, // 최대 캐싱 개수
+      isGlobal: true,
     }),
     BoardModule,
     UserModule,
