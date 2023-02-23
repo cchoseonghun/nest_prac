@@ -11,13 +11,16 @@ import { BoardService } from './board.service';
 import { CreateArticleDto } from './create-article.dto';
 import { DeleteArticleDto } from './delete-article.dto';
 import { UpdateArticleDto } from './update-article.dto';
+import { SkipThrottle, Throttle } from '@nestjs/throttler';
 
+@SkipThrottle()
 @Controller('board')
 export class BoardController {
   // 서비스 주입
   constructor(private readonly boardService: BoardService) {}
 
   // 게시물 목록을 가져오는 API
+  @SkipThrottle(false)
   @Get('/articles')
   async getArticles() {
     return await this.boardService.getArticles();
@@ -29,6 +32,7 @@ export class BoardController {
     return await this.boardService.getArticleById(articleId);
   }
 
+  @Throttle(15, 60)
   @Get('/hot-articles')
   async getHotArticles() {
     return await this.boardService.getHotArticles();
